@@ -1,0 +1,33 @@
+# Local smart-home stack for HearthVoice.
+#
+# Both services bind to localhost only. Nothing here reaches the internet.
+# Note: a packet capture confirming that has not been run (see report 5.5).
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2.0
+    container_name: hearthvoice-mqtt
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:1883:1883"
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - mosquitto-data:/mosquitto/data
+      - mosquitto-log:/mosquitto/log
+
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:2026.8
+    container_name: hearthvoice-ha
+    restart: unless-stopped
+    depends_on:
+      - mosquitto
+    environment:
+      - TZ=Asia/Dubai
+    ports:
+      - "127.0.0.1:8123:8123"
+    volumes:
+      - ./homeassistant:/config
+
+volumes:
+  mosquitto-data:
+  mosquitto-log:

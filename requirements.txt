@@ -1,0 +1,13 @@
+PyAudio==0.2.14
+faster-whisper==1.2.1
+numpy==2.5.2
+nvidia-riva-client==2.27.0
+onnxruntime==1.24.4
+openai==2.54.0
+opencv-python-headless==5.0.0.93
+paho-mqtt==2.1.0
+pillow==12.3.0
+pipecat-ai==1.8.1
+piper-tts==1.8.0
+pytest==9.1.1
+python-dotenv==1.2.3
